@@ -89,3 +89,18 @@ posgresqlをインストールしていない場合は上記コマンドでイ�
 
 6.bundle exec rails db:create
 設定ができたら、DBを作る
+
+## herokuへのデプロイ
+
+1.ターミナル上でheroku login
+デプロイしたいアプリのディレクトリパスで行うこと
+（herokuへの登録は済んでいる前提）
+
+2.ターミナル上でheroku create ○○
+サーバーの構築
+
+3.git push heroku main
+サーバーの構築ができたら、上記コマンドを実行
+herokuのサーバに、アップロードするためのコマンド
+
+4.
