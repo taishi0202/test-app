@@ -10,7 +10,7 @@ gem "rails", "~> 7.0.3"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+gem "postgresql"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -26,7 +26,24 @@ gem "stimulus-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
-
+gem 'active_model_serializers'
+gem 'ancestry'
+gem 'cocoon'
+gem "delayed_job_active_record"
+gem 'discard', '~> 1.2'
+gem 'elasticsearch-model', '~> 7.0'
+gem 'elasticsearch-rails', '~> 7.0'
+gem 'feedjira', '~> 2.1.4'
+gem 'hashid-rails', '~> 1.0'
+gem 'kaminari'
+gem 'paperclip', '~> 6.0.0'
+gem 'paranoia'
+gem 'rails-i18n'
+gem 'ransack'
+gem 'redis'
+gem 'rolify'
+gem 'seed-fu'
+gem 'whenever'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
