@@ -46,6 +46,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_model_serializers (0.10.13)
+      actionpack (>= 4.1, < 7.1)
+      activemodel (>= 4.1, < 7.1)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (7.0.3)
       activesupport (= 7.0.3)
       globalid (>= 0.3.6)
@@ -68,6 +73,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ancestry (4.2.0)
+      activerecord (>= 5.2.6)
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
@@ -81,16 +88,76 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    case_transform (0.2)
+      activesupport
     childprocess (4.1.0)
+    chronic (0.10.2)
+    climate_control (0.2.0)
+    cocoon (1.2.15)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     debug (1.5.0)
       irb (>= 1.3.6)
       reline (>= 0.2.7)
+    delayed_job (4.1.10)
+      activesupport (>= 3.0, < 8.0)
+    delayed_job_active_record (4.1.7)
+      activerecord (>= 3.0, < 8.0)
+      delayed_job (>= 3.0, < 5)
     digest (3.1.0)
+    discard (1.2.1)
+      activerecord (>= 4.2, < 8)
+    elasticsearch (7.17.1)
+      elasticsearch-api (= 7.17.1)
+      elasticsearch-transport (= 7.17.1)
+    elasticsearch-api (7.17.1)
+      multi_json
+    elasticsearch-model (7.2.1)
+      activesupport (> 3)
+      elasticsearch (~> 7)
+      hashie
+    elasticsearch-rails (7.2.1)
+    elasticsearch-transport (7.17.1)
+      faraday (~> 1)
+      multi_json
     erubi (1.10.0)
+    faraday (1.10.0)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-httpclient (~> 1.0)
+      faraday-multipart (~> 1.0)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.0)
+      faraday-patron (~> 1.0)
+      faraday-rack (~> 1.0)
+      faraday-retry (~> 1.0)
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-httpclient (1.0.1)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.2.0)
+    faraday-patron (1.0.0)
+    faraday-rack (1.0.0)
+    faraday-retry (1.0.3)
+    faraday_middleware (1.2.0)
+      faraday (~> 1.0)
+    feedjira (2.1.4)
+      faraday (>= 0.9)
+      faraday_middleware (>= 0.9)
+      loofah (>= 2.0)
+      sax-machine (>= 1.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hashid-rails (1.4.1)
+      activerecord (>= 4.0)
+      hashids (~> 1.0)
+    hashids (1.0.6)
+    hashie (5.0.0)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.0)
@@ -102,6 +169,19 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jsonapi-renderer (0.2.2)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -110,9 +190,17 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    mime-types (3.4.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2022.0105)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.1.2)
     minitest (5.15.0)
     msgpack (1.5.2)
+    multi_json (1.15.0)
+    multipart-post (2.2.3)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -130,6 +218,17 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.6-x86_64-darwin)
       racc (~> 1.4)
+    paperclip (6.0.0)
+      activemodel (>= 4.2.0)
+      activesupport (>= 4.2.0)
+      mime-types
+      mimemagic (~> 0.3.0)
+      terrapin (~> 0.6.0)
+    paranoia (2.6.0)
+      activerecord (>= 5.1, < 7.1)
+    pg (1.4.0)
+    postgresql (1.0.0)
+      pg
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
@@ -156,6 +255,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
+    rails-i18n (7.0.3)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (7.0.3)
       actionpack (= 7.0.3)
       activesupport (= 7.0.3)
@@ -164,11 +266,22 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    ransack (3.2.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
+    redis (4.6.0)
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
     rexml (3.2.5)
+    rolify (6.0.0)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    sax-machine (1.3.2)
+    seed-fu (2.3.9)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
     selenium-webdriver (4.2.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -181,10 +294,11 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     strscan (3.0.3)
+    terrapin (0.6.0)
+      climate_control (>= 0.0.3, < 1.0)
     thor (1.2.1)
     timeout (0.3.0)
     turbo-rails (1.1.1)
@@ -206,6 +320,8 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.5.4)
@@ -214,21 +330,39 @@ PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
+  active_model_serializers
+  ancestry
   bootsnap
   capybara
+  cocoon
   debug
+  delayed_job_active_record
+  discard (~> 1.2)
+  elasticsearch-model (~> 7.0)
+  elasticsearch-rails (~> 7.0)
+  feedjira (~> 2.1.4)
+  hashid-rails (~> 1.0)
   importmap-rails
   jbuilder
+  kaminari
+  paperclip (~> 6.0.0)
+  paranoia
+  postgresql
   puma (~> 5.0)
   rails (~> 7.0.3)
+  rails-i18n
+  ransack
+  redis
+  rolify
+  seed-fu
   selenium-webdriver
   sprockets-rails
-  sqlite3 (~> 1.4)
   stimulus-rails
   turbo-rails
   tzinfo-data
   web-console
   webdrivers
+  whenever
 
 RUBY VERSION
    ruby 3.0.2p107

@@ -58,7 +58,7 @@ yarnで導入するツールをあらかじめ導入するように設定
 
 ## rails new
 
-1.rails _<version>_ new . --skip-bundle
+1.rails _<version>_ new . --database=postgresql --skip-bundle
 rails -vでインストールした最新のrailsのバージョンを確認
 
 2.bundle config set --local path "vendor/bundle"
@@ -68,3 +68,24 @@ bundle install を実行した際のインストール先が vendor/bundle 配�
 
 4.bundle exec rails l
 ブラウザでlocalhost:3000で表示されれば完了
+
+## DBの構築
+
+1.herokuでデプロイするため、postgresqlを選択
+brew install postgresql
+posgresqlをインストールしていない場合は上記コマンドでインストール
+
+2.brew services start postgresql
+ターミナルで上記コマンドを入力し、postgresqlのサーバーを立ち上げる
+
+3.psql -d postgres
+ターミナルの別タブで上記コマンドを入力し、サーバーに入る
+
+4.CREATE ROLE 名前 LOGIN;
+サーバーに入ったら、上記コマンドで新規ユーザーの登録及び、ログイン権限を与える
+
+5.ALTER ROLE 名前 CREATEDB;
+上記コマンドでDB作成の権限を与える
+
+6.bundle exec rails db:create
+設定ができたら、DBを作る
