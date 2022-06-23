@@ -90,6 +90,8 @@ posgresqlをインストールしていない場合は上記コマンドでイ�
 6.bundle exec rails db:create
 設定ができたら、DBを作る
 
+7.デプロイ用にindex.html.erbのルートパスの設定を忘れずに
+
 ## herokuへのデプロイ
 
 1.ターミナル上でheroku login
@@ -99,8 +101,15 @@ posgresqlをインストールしていない場合は上記コマンドでイ�
 2.ターミナル上でheroku create ○○
 サーバーの構築
 
-3.git push heroku main
+3.Gemfile.lockを確認
+Gemfile.lockに書かれてあるPLATFORMが「x86_64-linux」でなかった場合
+サーバーにmainブランチをアップロードできない
+「x86_64-linux」でなかった場合は以下のコマンドをデプロイしたいアプリのディレクトリパスで入力
+bundle lock --add-platform x86_64-linux --add-platform ruby
+
+4.git push heroku main
 サーバーの構築ができたら、上記コマンドを実行
 herokuのサーバに、アップロードするためのコマンド
 
-4.
+5.heroku run rake db:migrate
+DBを設定
